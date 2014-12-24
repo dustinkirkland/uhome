@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 PKG="uhome"
 
 FILE="/etc/$PKG/addresses"
@@ -68,9 +70,9 @@ test_addr() {
 
 for addr in $(cat "$FILE" | grep -v "^#"); do
 	if test_addr "$addr"; then
-		echo "$PKG:  Yep!"
+		echo "$PKG →  Yep!"
 		exit 0
 	fi
 done
-echo "$PKG:  Nope!"
+echo "$PKG →  Nope!"
 exit 1
