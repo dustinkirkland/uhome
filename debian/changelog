@@ -4,5 +4,11 @@ uhome (1.0) unreleased; urgency=medium
     debian/compat, debian/control, debian/copyright, debian/install,
     debian/rules, debian/source/format, README, uhome:
     - initial commit
+  * === added directory etc, === added directory etc/uhome, === added
+    directory usr, === added directory usr/bin, debian/install,
+    debian/postinst, etc/uhome/addresses, uhome => usr/bin/uhome:
+    - create cronjob, install usr and etc
+    - add user uhome for cronjob
+    - parameterize script
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600

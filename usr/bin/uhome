@@ -1,13 +1,37 @@
 #!/bin/sh
 
 PKG="uhome"
-DELAY=300
-ADDR_FILE="$1"
-MAX_TRIES=10
-NETWORK_DEVICE=
-while read network_device x x x x x x mask x x x; do
+
+FILE="/etc/$PKG/addresses"
+TRIES=10
+QUIET=0
+while read DEV x x x x x x mask x x x; do
 	[ "$mask" = "00000000" ] && break
 done < /proc/net/route
+while [ ! -z "$1" ]; do
+	case "${1}" in
+		-d|--dev)
+			DEV="$2"
+			shift 2
+		;;
+		-f|--file)
+			FILE="$2"
+			shift 2
+		;;
+		-q|--quiet)
+			QUIET="1"
+			shift 1
+		;;
+		-t|--tries)
+			TRIES="$2"
+			shift 2
+		;;
+		*)
+			echo "Unknown options [$1]" 1>&2
+			exit 1
+		;;
+	esac
+done
 
 
 is_ip() {
@@ -31,7 +55,7 @@ test_addr() {
 		echo "ERROR: Invalid address in configuration file [$addr]" 1>&2
 		exit 1
 	fi
-	for i in $(seq 1 $MAX_TRIES); do
+	for i in $(seq 1 $TRIES); do
 		if [ "$ip" = "1" ]; then
 			ping -q -c 1 "$addr" >/dev/null 2>&1 && return
 		elif [ "$mac" = "1" ]; then
@@ -42,19 +66,11 @@ test_addr() {
 	false
 }
 
-set_home() {
-	home="$1"
-}
-
-home=0
-for addr in $(cat "$ADDR_FILE"); do
+for addr in $(cat "$FILE" | grep -v "^#"); do
 	if test_addr "$addr"; then
-		set_home "1"
-		echo "=== YOURE AT HOME! ==="
-		sleep $DELAY
-		continue
+		echo "$PKG:  Yep!"
+		exit 0
 	fi
 done
-[ "$home" = "0" ] && set_home "0"
-exit "$home"
-
+echo "$PKG:  Nope!"
+exit 1
