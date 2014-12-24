@@ -1,0 +1,15 @@
+Source: uhome
+Section: admin
+Priority: optional
+Maintainer: Dustin Kirkland <kirkland@ubuntu.com>
+Build-Depends: debhelper (>= 7.0.50~)
+Standards-Version: 3.9.5
+Homepage: http://launchpad.net/uhome
+
+Package: uhome
+Architecture: all
+Depends: ${misc:Depends}, iputils-ping, iputils-arping
+Description: test whether or not you're home, based on device presence
+ uHome is a utility, useful in smart home automation, that tests whether or
+ not you're at home, by looking for devices (such as your phone) on the
+ local network.

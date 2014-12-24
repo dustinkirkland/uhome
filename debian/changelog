@@ -1,0 +1,8 @@
+uhome (1.0) unreleased; urgency=medium
+
+  * === added directory debian, === added directory debian/source,
+    debian/compat, debian/control, debian/copyright, debian/install,
+    debian/rules, debian/source/format, README, uhome:
+    - initial commit
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
