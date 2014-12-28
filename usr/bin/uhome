@@ -4,7 +4,15 @@ set -e
 
 PKG="uhome"
 
-FILE="/etc/$PKG/addresses"
+if [ "$HOME" = "/var/lib/$PKG" ]; then
+	FILE="/etc/$PKG/addresses"
+	STATE="/var/lib/$PKG/state"
+else
+	FILE="$HOME/.$PKG/addresses"
+	STATE="$HOME/.$PKG/state"
+	mkdir -p $(dirname "$STATE")
+	touch "$FILE"
+fi
 TRIES=10
 QUIET=0
 while read DEV x x x x x x mask x x x; do
@@ -50,29 +58,36 @@ test_addr() {
 	local ip=0
 	local mac=0
 	if is_ip "$addr"; then
-		ip=1
+		ip="$addr"
 	elif is_mac "$addr"; then
-		mac=1
+		ip=$(arp -an | grep " at $addr " | sed -e "s/^.*(//" -e "s/).*$"//)
 	else
 		echo "ERROR: Invalid address in configuration file [$addr]" 1>&2
 		exit 1
 	fi
 	for i in $(seq 1 $TRIES); do
-		if [ "$ip" = "1" ]; then
-			ping -q -c 1 "$addr" >/dev/null 2>&1 && return
-		elif [ "$mac" = "1" ]; then
-			ip=$(arp -an | grep " at $addr " | sed -e "s/^.*(//" -e "s/).*$"//)
-			arping -q -c 1 -I "$NETWORK_DEVICE" "$ip" >/dev/null 2>&1 && return
-		fi
+		ping -q -c 1 "$addr" >/dev/null 2>&1 && return
 	done
 	false
 }
 
+set_state() {
+	local state="$1"
+	case "$state" in
+		0)
+			[ "$QUIET" = "1" ] || echo "$PKG →  Yep!"
+			echo 0 >"$STATE"
+			exit 0
+		;;
+		1)
+			[ "$QUIET" = "1" ] || echo "$PKG →  Nope!"
+			echo 1 >"$STATE"
+			exit 1
+		;;
+	esac
+}
+
 for addr in $(cat "$FILE" | grep -v "^#"); do
-	if test_addr "$addr"; then
-		echo "$PKG →  Yep!"
-		exit 0
-	fi
+	test_addr "$addr" && set_state 0 || continue
 done
-echo "$PKG →  Nope!"
-exit 1
+set_state 1

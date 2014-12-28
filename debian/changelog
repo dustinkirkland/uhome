@@ -12,5 +12,11 @@ uhome (1.0) unreleased; urgency=medium
     - parameterize script
   * debian/postrm, usr/bin/uhome:
     - set -e on script
+  * === added directory etc/cron.d, === added directory var, === added
+    directory var/lib, === added directory var/lib/uhome,
+    debian/control, debian/postinst, debian/postrm (properties changed: -
+    x to +x), etc/cron.d/uhome, README, usr/bin/uhome:
+    - add cronjob, add uhome user for cronjob, support uhome and non-uhome
+      user, track state in state file
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600

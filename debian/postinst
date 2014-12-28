@@ -6,7 +6,7 @@ PKG="uhome"
 
 # Create the uhome user if necessary
 if ! getent passwd $PKG >/dev/null; then
-	adduser --disabled-password --quiet --system --home /var/cache/$PKG --ingroup daemon $PKG --shell /bin/false
+	adduser --disabled-password --quiet --system --home /var/lib/$PKG --ingroup daemon $PKG --shell /bin/false
 fi
 
 #DEBHELPER#
