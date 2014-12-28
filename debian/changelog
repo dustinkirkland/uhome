@@ -18,5 +18,8 @@ uhome (1.0) unreleased; urgency=medium
     x to +x), etc/cron.d/uhome, README, usr/bin/uhome:
     - add cronjob, add uhome user for cronjob, support uhome and non-uhome
       user, track state in state file
+  * etc/uhome/addresses, usr/bin/uhome:
+    - drop support for mac address; doesn't seem to work very well;
+      android devices I tested don't respond to broadcast ping
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
