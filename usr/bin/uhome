@@ -32,15 +32,8 @@ else
 fi
 TRIES=10
 QUIET=0
-while read DEV x x x x x x mask x x x; do
-	[ "$mask" = "00000000" ] && break
-done < /proc/net/route
 while [ ! -z "$1" ]; do
 	case "${1}" in
-		-d|--dev)
-			DEV="$2"
-			shift 2
-		;;
 		-f|--file)
 			FILE="$2"
 			shift 2

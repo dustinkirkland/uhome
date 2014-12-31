@@ -33,5 +33,10 @@ uhome (1.0) unreleased; urgency=medium
       use case of uhome
   * README:
     - update doc
+  * === added directory usr/share/man, === added directory
+    usr/share/man/man1, === added symlink usr/share/man/man1/nest-
+    away.1, === target is unest-home.1, usr/bin/uhome,
+    usr/share/man/man1/nest-home.1, usr/share/man/man1/uhome.1:
+    - add manpages
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600

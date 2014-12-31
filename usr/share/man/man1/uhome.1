@@ -1,0 +1,51 @@
+.TH uhome 1 "31 December 2014" uhome "uhome"
+.SH NAME
+uhome \- tests whether or not you're home, based on device presence
+
+.SH SYNOPSIS
+\fBuhome\fP [-f|--file FILE] [-q|--quiet] [-t|--tries TRIES]
+
+.SH OPTIONS
+
+	-f, --file FILE	filename containing list of IP addresses to test, one per line, default is \fI~/.uhome/addresses\fP
+
+	-q, --quiet		Suppress all output
+
+	-t, --tries TRIES	Number of times to ping each IP address, default is 3
+
+
+.SH DESCRIPTION
+
+This utility will iterate over a list of IP addresses in FILE (default \fI~/.uhome/addresses\fP), and \fBping\fP(8) each one of them up to TRIES  times.  If any one of those responds successfully, then you're deemed "home" and \fBuhome\fP exits successfully, with 0.  Otherwise, you must not be home, and \fBuhome\fP exits with 1.
+
+.SH EXAMPLES
+
+Look up your phone's IP address, either on your router, or in your Phone -> Settings -> About Phone -> Status -> IP Address.
+
+Add one or more of these to \fI~/.uhome/addresses\fP.
+
+Run:
+
+	$ uhome
+
+	uhome →  Yep!
+
+	$ uhome
+
+	uhome →  Nope!
+
+Couple this with some logic:
+
+	$ uhome && nest-home || nest-away
+
+Put this in a cronjob:
+
+	*/5 * * * * 	uhome && nest-home || nest-away
+
+.SH SEE ALSO
+\fBping\fP(8), \fBnest-home\fP(1), \fBnest-away\fP(1), \fBcron\fP(8)
+
+.SH AUTHOR
+This manpage and the utility were written by Dustin Kirkland <dustin.kirkland@gmail.com> for Ubuntu systems (but may be used by others).  Permission is granted to copy, distribute and/or modify this document and the utility under the terms of the Apache2 License.
+
+The complete text of the Apache2 License can be found in \fI/usr/share/common-licenses/Apache-2.0\fP on Debian/Ubuntu systems.
