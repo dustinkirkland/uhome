@@ -8,7 +8,7 @@ Homepage: http://launchpad.net/uhome
 
 Package: uhome
 Architecture: all
-Depends: ${misc:Depends}, iputils-ping, adduser
+Depends: ${misc:Depends}, ${python:Depends}, iputils-ping, adduser
 Description: test whether or not you're home, based on device presence
  uHome is a utility, useful in smart home automation, that tests whether or
  not you're at home, by looking for devices (such as your phone) on the
