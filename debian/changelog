@@ -23,5 +23,9 @@ uhome (1.0) unreleased; urgency=medium
       android devices I tested don't respond to broadcast ping
   * etc/cron.d/uhome, === removed directory etc/cron.d:
     - remove cronojob, afterall
+  * === added directory usr/share, === added directory usr/share/uhome,
+    usr/share/uhome/uhome_14.png, usr/share/uhome/uhome_192.png,
+    usr/share/uhome/uhome_64.png, usr/share/uhome/uhome.png:
+    - add a simple logo
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
