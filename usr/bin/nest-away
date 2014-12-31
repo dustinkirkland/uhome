@@ -1,0 +1,64 @@
+#!/usr/bin/python
+#
+# nest-home, nest-away
+#
+# Copyright 2014 Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import os
+import time
+import urllib
+import urllib2
+import sys
+import json
+
+# login
+username = os.environ.get("NEST_USERNAME", "")
+password = os.environ.get("NEST_PASSWORD", "")
+#headers = {"user-agent": "Nest/1.1.0.10 CFNetwork/548.0.4", "X-nl-protocol-version": "1"}
+headers = {"X-nl-protocol-version": "1"}
+data = urllib.urlencode({"username": username, "password": password})
+request = urllib2.Request("https://home.nest.com/user/login", data, headers)
+response = urllib2.urlopen(request).read()
+response = json.loads(response)
+transport_url = response["urls"]["transport_url"]
+userid = response["userid"]
+headers["Authorization"] = "Basic " + response["access_token"]
+headers["X-nl-user-id"] = userid
+# get structure id
+request = urllib2.Request(transport_url + "/v2/mobile/user." + userid, headers=headers)
+response = urllib2.urlopen(request).read()
+response = json.loads(response)
+structure_id = response["structure"].keys()[0]
+# set away, if necessary
+currently_away = response["structure"][structure_id]["away"]
+if "away" in sys.argv[0] and not currently_away:
+	data = '{"away_timestamp":' + str(time.time()) + ',"away":true,"away_setter":0}'
+	new_away = "True"
+elif not "away" in sys.argv[0] and currently_away:
+	data = '{"away_timestamp":' + str(time.time()) + ',"away":false,"away_setter":0}'
+	new_away = "False"
+else:
+	data = ""
+	new_away = str(currently_away)
+if data:
+	structure_url = transport_url + "/v2/put/structure" "." + structure_id
+	request = urllib2.Request(structure_url, data, headers)
+	try:
+		urllib2.urlopen(request).read()
+	except urllib2.URLError:
+		print "Put operation failed"
+	print "Nest updated -->  away=" + new_away
+else:
+	print "No need to update Nest --> away=" + new_away
