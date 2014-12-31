@@ -1,4 +1,4 @@
-uhome (1.0) unreleased; urgency=medium
+uhome (1.0-0ubuntu1) vivid; urgency=medium
 
   * === added directory debian, === added directory debian/source,
     debian/compat, debian/control, debian/copyright, debian/install,
@@ -42,4 +42,4 @@ uhome (1.0) unreleased; urgency=medium
     directory etc/uhome, usr/bin/uhome:
     drop the etc/ conffile
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Dec 2014 00:52:01 -0600
