@@ -31,5 +31,7 @@ uhome (1.0) unreleased; urgency=medium
     usr/bin/nest-away:
     - add scripts that can set a nest as home or away, as a sample
       use case of uhome
+  * README:
+    - update doc
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 17 Dec 2014 22:16:38 -0600
