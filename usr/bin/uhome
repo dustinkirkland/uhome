@@ -21,15 +21,10 @@ set -e
 
 PKG="uhome"
 
-if [ "$HOME" = "/var/lib/$PKG" ]; then
-	FILE="/etc/$PKG/addresses"
-	STATE="/var/lib/$PKG/state"
-else
-	FILE="$HOME/.$PKG/addresses"
-	STATE="$HOME/.$PKG/state"
-	mkdir -p $(dirname "$STATE")
-	touch "$FILE"
-fi
+FILE="$HOME/.$PKG/addresses"
+touch "$FILE"
+STATE="$HOME/.$PKG/state"
+mkdir -p $(dirname "$STATE")
 TRIES=10
 QUIET=0
 while [ ! -z "$1" ]; do
