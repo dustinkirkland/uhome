@@ -1,9 +1,9 @@
-uhome (1.1) unreleased; urgency=medium
+uhome (1.1-0ubuntu1) vivid; urgency=medium
 
   * debian/control:
     - add python dependency
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Dec 2014 00:52:04 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Dec 2014 00:57:39 -0600
 
 uhome (1.0-0ubuntu1) vivid; urgency=medium
 
