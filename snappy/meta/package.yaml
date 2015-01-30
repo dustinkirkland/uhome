@@ -4,5 +4,6 @@ vendor: Dustin Kirkland <dustin.kirkland@gmail.com>
 icon: meta/uhome.svg
 binaries:
  - name: bin/uhome
+ - name: bin/nest-update
  - name: bin/nest-home
  - name: bin/nest-away

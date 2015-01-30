@@ -20,10 +20,10 @@
 set -e
 
 PKG="uhome"
-
-STATE="$HOME/.$PKG/state"
+[ -n "$SNAPP_APP_USER_DATA_PATH" ] && DATADIR="$SNAPP_APP_USER_DATA_PATH" || DATADIR="$HOME/.$PKG/"
+STATE="$DATADIR/state"
 mkdir -p $(dirname "$STATE")
-FILE="$HOME/.$PKG/addresses"
+FILE="$DATADIR/addresses"
 touch "$FILE"
 TRIES=10
 QUIET=0

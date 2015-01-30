@@ -16,23 +16,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-if [ ! -e $HOME/.uhome/uhomerc ]; then
-	echo > $HOME/.uhome/uhomerc <<EOF
+[ -d "$SNAPP_APP_USER_DATA_PATH" ] && DATADIR="$SNAPP_APP_USER_DATA_PATH" || DATADIR="$HOME/.$PKG/"
+if [ ! -e "$DATADIR/uhomerc" ]; then
+	echo > "$DATADIR/uhomerc" <<EOF
 export NEST_USERNAME=
 export NEST_PASSWORD=
 export NEST_EMAIL=
 EOF
 fi
-. $HOME/.uhome/uhomerc
+. "$DATADIR/uhomerc"
 
 if [ -z "$NEST_USERNAME" ] || [ -z "$NEST_PASSWORD" ]; then
-	echo "ERROR: Please update [$HOME/.uhome/uhomerc] with your NEST_USERNAME and NEST_PASSWORD" 1>&2
+	echo "ERROR: Please update [$DATADIR/uhomerc] with your NEST_USERNAME and NEST_PASSWORD" 1>&2
 	exit 1
 fi
 date
-before=$(cat $HOME/.uhome/state)
+before=$(cat "$DATADIR/state")
 uhome
-now=$(cat $HOME/.uhome/state)
+now=$(cat "$DATADIR/state")
 if [ "$before" = "0" ] && [ "$now" = "1" ]; then
         date | mail -s "Bon voyage" $NEST_EMAIL
         echo "Bon voyage"

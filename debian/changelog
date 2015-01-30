@@ -11,6 +11,14 @@ uhome (1.2) unreleased; urgency=medium
     - add a uhome-nest-update utility and manpage
     - speedup the uhome script by limiting pings to wait at most 1 second
     - iterate over the tries back and forth across devices
+  * snappy/Makefile, snappy/meta/package.yaml, usr/bin/uhome,
+    usr/bin/uhome-nest-update => usr/bin/nest-update,
+    usr/share/man/man1/uhome-nest-update.1 => usr/share/man/man1/nest-
+    update.1:
+    - rename to nest-update
+    - ensure we have all of the binaries we need in the .snap
+    - use the snap data path
+    - add some useful error messages
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Dec 2014 00:57:41 -0600
 
