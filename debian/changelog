@@ -1,6 +1,10 @@
 uhome (1.2) unreleased; urgency=medium
 
-  * UNRELEASED
+  * === added directory snappy, === added directory snappy/bin, ===
+    added directory snappy/meta, snappy/Makefile,
+    snappy/meta/package.yaml, snappy/meta/readme.md, usr/bin/uhome,
+    usr/share/uhome/uhome.svg:
+    - add initial packaging for snappy
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Dec 2014 00:57:41 -0600
 

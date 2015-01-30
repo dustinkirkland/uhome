@@ -21,10 +21,10 @@ set -e
 
 PKG="uhome"
 
-FILE="$HOME/.$PKG/addresses"
-touch "$FILE"
 STATE="$HOME/.$PKG/state"
 mkdir -p $(dirname "$STATE")
+FILE="$HOME/.$PKG/addresses"
+touch "$FILE"
 TRIES=10
 QUIET=0
 while [ ! -z "$1" ]; do
