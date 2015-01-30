@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# uhome-nest-update
+#
+# Copyright 2015 Dustin Kirkland <dustin.kirkland@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+if [ ! -e $HOME/.uhome/uhomerc ]; then
+	echo > $HOME/.uhome/uhomerc <<EOF
+export NEST_USERNAME=
+export NEST_PASSWORD=
+export NEST_EMAIL=
+EOF
+fi
+. $HOME/.uhome/uhomerc
+
+if [ -z "$NEST_USERNAME" ] || [ -z "$NEST_PASSWORD" ]; then
+	echo "ERROR: Please update [$HOME/.uhome/uhomerc] with your NEST_USERNAME and NEST_PASSWORD" 1>&2
+	exit 1
+fi
+date
+before=$(cat $HOME/.uhome/state)
+uhome
+now=$(cat $HOME/.uhome/state)
+if [ "$before" = "0" ] && [ "$now" = "1" ]; then
+        date | mail -s "Bon voyage" $NEST_EMAIL
+        echo "Bon voyage"
+        nest-away
+elif [ "$before" = "1" ] && [ "$now" = "0" ]; then
+        date | mail -s "Welcome home" $NEST_EMAIL
+        echo "Welcome home"
+        nest-home
+fi
+date

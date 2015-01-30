@@ -63,9 +63,7 @@ test_addr() {
 		echo "ERROR: Invalid address in configuration file [$addr]" 1>&2
 		exit 1
 	fi
-	for i in $(seq 1 $TRIES); do
-		ping -q -c 1 "$addr" >/dev/null 2>&1 && return
-	done
+	ping -q -W 1 -c 1 "$addr" >/dev/null 2>&1 && return
 	false
 }
 
@@ -85,7 +83,15 @@ set_state() {
 	esac
 }
 
-for addr in $(cat "$FILE" | grep -v "^#"); do
-	test_addr "$addr" && set_state 0 || continue
+addrs=$(cat "$FILE" | grep -v "^#") || true
+if [ -z "$addrs" ]; then
+	echo "ERROR: Please add one or more IP addresses to [$FILE]" 2>&1
+	exit 1
+fi
+
+for i in $(seq 1 $TRIES); do
+	for addr in $addrs; do
+		test_addr "$addr" && set_state 0 || continue
+	done
 done
 set_state 1

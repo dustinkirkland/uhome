@@ -5,6 +5,12 @@ uhome (1.2) unreleased; urgency=medium
     snappy/meta/package.yaml, snappy/meta/readme.md, usr/bin/uhome,
     usr/share/uhome/uhome.svg:
     - add initial packaging for snappy
+  * snappy/Makefile, usr/bin/uhome, usr/bin/uhome-nest-update,
+    usr/share/man/man1/uhome-nest-update.1:
+    - update makefile to include svg
+    - add a uhome-nest-update utility and manpage
+    - speedup the uhome script by limiting pings to wait at most 1 second
+    - iterate over the tries back and forth across devices
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Dec 2014 00:57:41 -0600
 
