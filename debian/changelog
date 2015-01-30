@@ -1,4 +1,4 @@
-uhome (1.2) unreleased; urgency=medium
+uhome (1.2-0ubuntu1) vivid; urgency=medium
 
   * === added directory snappy, === added directory snappy/bin, ===
     added directory snappy/meta, snappy/Makefile,
@@ -20,7 +20,7 @@ uhome (1.2) unreleased; urgency=medium
     - use the snap data path
     - add some useful error messages
 
- -- Dustin Kirkland <kirkland@ubuntu.com>  Wed, 31 Dec 2014 00:57:41 -0600
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Jan 2015 21:03:08 +0100
 
 uhome (1.1-0ubuntu1) vivid; urgency=medium
 
