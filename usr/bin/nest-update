@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+PKG=uhome
 [ -d "$SNAPP_APP_USER_DATA_PATH" ] && DATADIR="$SNAPP_APP_USER_DATA_PATH" || DATADIR="$HOME/.$PKG/"
 if [ ! -e "$DATADIR/uhomerc" ]; then
 	echo > "$DATADIR/uhomerc" <<EOF
