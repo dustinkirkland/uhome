@@ -15,6 +15,15 @@ Note that the environment variables \fBNEST_USERNAME\fP and \fBNEST_PASSWORD\fP 
 .SH DESCRIPTION
 This utility will set update your Nest's "away" setting, noting that you're either home or away, depending on how you invoke it.
 
+.SH FILES
+You need to set up a file at \fI~/.uhome/nest.yaml\fP with your Nest credentials:
+
+	$ cat ~/.uhome/nest.yaml
+
+	username: "your-email@example.com"
+
+	password: "1-2-3-4-5"
+
 .SH EXAMPLES
 
 	$ nest-away

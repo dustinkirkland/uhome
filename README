@@ -4,3 +4,6 @@ uHome is:
 		- identified by IP address
 	- if any one of those is found on the network, then it immediately exits 0, otherwise it exits 1
 	- very simple and useful in conjunction with home automation tools
+
+transport_url=$(curl -o- -X POST https://home.nest.com/user/login -d 'username=foo@email.com' -d -d 'password=abc123' | sed -e "s/.*transport_url\":\"//" -e "s/\".*//")
+. ~/.uhome/uhomerc && curl -s -o- -X POST https://home.nest.com/user/login -d username=$NEST_USERNAME -d password=$NEST_PASSWORD
