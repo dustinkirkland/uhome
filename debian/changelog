@@ -5,6 +5,8 @@ uhome (1.3) unreleased; urgency=medium
   * README, usr/bin/nest-away, usr/share/man/man1/nest-home.1:
     - use requests module, login must be POST not GET
     - use yaml for ~/.uhome/nest.yaml for username/password
+  * debian/control:
+    - depend on python-yaml and python-requests
 
  -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 30 Jan 2015 21:03:10 +0100
 
